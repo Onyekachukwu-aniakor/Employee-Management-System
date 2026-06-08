@@ -2,13 +2,13 @@ import { Routes, Route, Navigate } from "react-router-dom"
 import { Toaster } from "react-hot-toast"
 import LoginLanding from './pages/LoginLanding';
 import Layout from './pages/Layout'
-import Dashboard from './pages/Layout'
-import Employees from './pages/Layout'
+import Dashboard from './pages/Dashboard'
+import Employees from './pages/Employees'
 import Attendance from "./pages/Attendance";
 import Leave from "./pages/Leave";
 import Payslips from "./pages/Payslips";
 import Settings from "./pages/Settings";
-import PrintPayslips from './pages/PrintPayslip'
+import PrintPayslip from './pages/PrintPayslip'
 import LoginForm from "./components/LoginForm";
 
 
@@ -31,7 +31,7 @@ const App = () => {
      <Route path="/settings" element={<Settings/>}/>
 
      </Route>
-     <Route path="/print/payslips/:id" element={<PrintPayslips/>}/>
+     <Route path="/print/payslips/:id" element={<PrintPayslip/>}/>
      {/* below '*' means you can navigate to path mounted  on it and other than other paths  wrapped in Layout above */}
      <Route path="*" element={<Navigate to='/dashboard' replace/>}/>
     </Routes>
