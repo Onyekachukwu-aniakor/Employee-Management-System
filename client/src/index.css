@@ -16,12 +16,12 @@
 
     /* Button styles */
     .btn-primary {
-        @apply bg-linear-to-r from-indigo-600 to-indigo-500 text-white px-5 py-2.5 rounded-md text-sm
+        @apply bg-linear-to-r from-indigo-600 to-indigo-500 text-white px-3 py-2 rounded-md text-sm
             hover:from-indigo-700 hover:to-indigo-600 transition-all duration-200 shadow-md shadow-indigo-500/25
             active:scale-[0.98];
     }
     .btn-secondary {
-        @apply bg-white text-slate-700 border border-slate-200 px-5 py-2.5 rounded-md text-sm
+        @apply bg-white text-slate-700 border border-slate-200 px-3 py-2 rounded-md text-sm
             hover:bg-slate-50 hover:border-slate-300 transition-all duration-200;
     }
 
