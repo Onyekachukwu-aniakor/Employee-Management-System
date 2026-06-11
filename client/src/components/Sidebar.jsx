@@ -12,7 +12,7 @@ const Sidebar = () => {
 
     useEffect(()=>{
         //get userName
-        setUserName(dummyProfileData.firstName + '' +  dummyProfileData.lastName)
+        setUserName(dummyProfileData.firstName   + ''   +    dummyProfileData.lastName)
     },[]);
     //close mobile sidebar on route change
     useEffect(()=>{
@@ -20,7 +20,7 @@ const Sidebar = () => {
         setMobileMenu(false)
     },[pathname]);
 
-    const role = "" || 'EMPLOYEE';
+    const role = "ADMIN" || 'EMPLOYEE';
     const navItems = [
         {name: 'Dashboard', href:'/dashboard', icon: LayoutGridIcon},
         role === 'ADMIN'? {name: 'Employees', href:'/employees', icon: UserIcon} 
@@ -102,7 +102,7 @@ const Sidebar = () => {
   return (
     <>
     {/* Display Hamburger icon/button */}
-    <button className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-slate-900 text-white rounded-lg shadow-lg border border-white/20" 
+    <button className="lg:hidden fixed top-4 right-4 z-50 p-2 bg-slate-900 text-white rounded-lg shadow-lg border border-white/20" 
     onClick={()=>setMobileMenu(true)}>
         <MenuIcon size={20}/>
     </button>
