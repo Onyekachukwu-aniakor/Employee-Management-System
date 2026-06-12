@@ -19,7 +19,7 @@ const Employees = () => {
     setEmployees(dummyEmployeeData.filter((emp)=>(selectedDept? emp.department === selectedDept : emp)));
     setTimeout(()=>{setLoading(false)}, 1000)
     
-  }, []);
+  }, [selectedDept]);
 
   useEffect(()=>{
   fetchEmployees();
