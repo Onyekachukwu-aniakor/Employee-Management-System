@@ -10,14 +10,14 @@ const CheckInButton = ({todayRecord, onAction}) => {
             onAction()
         },1000)
     };
-    /* if(todayRecord?.checkOut){
+    if(todayRecord?.checkOut){
         return (
             <div className="flex flex-col items-center justify-center p-5 bg-slate-50 rounded-lg border border-slate-200">
                 <h3 className='  text-lg font-bold text-slate-900 '>Work Day Completed</h3>
                 <p className='text-slate-500 text-sm mt-1'>Great job! See you tomorrow</p>
             </div>
         )
-    } */
+    }
 
     const isCheckedIn = !!todayRecord?.isCheckedIn;
   return (
