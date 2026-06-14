@@ -18,7 +18,7 @@ const ApplyLeaveModal = ({onClose, onSuccess, open}) => {
 
     if(!open){return null}
   return (
-    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-3"  onClick={onClose}>
+    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-3"  >
         <div className="relative bg-white rounded-lg shadow-lg w-full max-w-lg animate-fade-in"
         Click={(e)=>e.stopPropagation()}>
             {/* Header */}
@@ -29,7 +29,7 @@ const ApplyLeaveModal = ({onClose, onSuccess, open}) => {
                 </div>
                 <button Click={onClose}
                  className="p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-400 hover:text-slate-600">
-                    <X className="w-5 h-5"/>
+                    <X className="w-5 h-5"  onClick={onClose}/>
                 </button>
             </div>
 
