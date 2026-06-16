@@ -34,8 +34,6 @@ const leaveApplicationSchema = new mongoose.Schema({
     
 }, {timestamps: true});
 
-attendanceSchema.index({employeeId : 1, date: 1}, {unique: true})
-
 const LeaveApplication = mongoose.models.LeaveApplication || mongoose.model('LeaveApplication', leaveApplicationSchema)
 
 // mongoose.models.User: so that mongoose will check if User models is available so it can be used

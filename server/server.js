@@ -7,6 +7,8 @@ import employeesRouter from './routes/employeeRoutes.js';
 import authRouter from './routes/authRoutes.js';
 import profileRouter from './routes/profileRoutes.js';
 import attendanceRouter from './routes/attendanceRoutes.js';
+import leaveRouter from './routes/leaveRoutes.js';
+import payslipRouter from './routes/payslipRoutes.js';
 
 const app = express();
 const port = process.env.PORT || 8000
@@ -28,6 +30,8 @@ The StorageEngine specified in storage will be used to store files. If storage i
   app.use('/api/auth', authRouter)
   app.use('/api/profile', profileRouter)
   app.use('/api/attendance', attendanceRouter)
+  app.use('/api/leave', leaveRouter)
+  app.use('/api/payslips', payslipRouter)
 
   
 
