@@ -100,7 +100,7 @@ const leaveApplicationReminder = inngest.createFunction(
 
 //CRON : check attendance at 11:30 AM ist (06 : 00 UTC) and email absent employees
 const attendanceReminderCron = inngest.createFunction(
-  { id: "attendance-reminder-cron", triggers: [{cron: '0 0 6 * * *'}] },
+  { id: "attendance-reminder-cron", triggers: [{cron: 'TZ=Asia/Kolkata 30 11  * * *'}] },
   async ({  step }) => {
     // step1: get today's date range
     //'run' means: Use this tool to run business logic. Each call to run will be retried individually, meaning you can compose complex workflows that safely retry dependent asynchronous actions. The function you pass to run will be called only when this "step" is to be executed and can be synchronous or asynchronous. In either case, the return value of the function will be the return value of the run tool, meaning you can return and reason about return data for next steps.
