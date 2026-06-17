@@ -10,6 +10,8 @@ import attendanceRouter from './routes/attendanceRoutes.js';
 import leaveRouter from './routes/leaveRoutes.js';
 import payslipRouter from './routes/payslipRoutes.js';
 import dashbaordRouter from './routes/dashboardRoutes.js';
+import { serve } from "inngest/express";
+import { inngest, functions } from "./inngest/index.js"
 
 const app = express();
 const port = process.env.PORT || 8000
@@ -34,6 +36,7 @@ The StorageEngine specified in storage will be used to store files. If storage i
   app.use('/api/leave', leaveRouter)
   app.use('/api/payslips', payslipRouter)
   app.use('/api/dashboard', dashbaordRouter)
+  app.use("/api/inngest", serve({ client: inngest, functions }));
 
   
 
