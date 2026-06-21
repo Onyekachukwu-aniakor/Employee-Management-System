@@ -1,6 +1,5 @@
 import { format } from "date-fns"
 import { Download } from "lucide-react"
-import { useState } from "react"
 
 
 const PayslipList = ({payslips, isAdmin}) => {
