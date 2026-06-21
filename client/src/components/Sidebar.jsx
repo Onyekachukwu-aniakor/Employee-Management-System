@@ -23,7 +23,7 @@ const Sidebar = () => {
 
         api.get('/profile').then(({data})=>{
         if(data.firstName){
-             setUserName(`${data.firstName}  ${data.lastName  || ' '}`.trim());}
+             setUserName(`${data.firstName} ${data.lastName  || ' '}`.trim());}
        }).catch((error)=>{
         console.error('An error occurred:', error.message)
        })
@@ -44,7 +44,7 @@ const Sidebar = () => {
     const navItems = [
         {name: 'Dashboard', href:'/dashboard', icon: LayoutGridIcon},
         role === 'ADMIN'? {name: 'Employees', href:'/employees', icon: UserIcon} 
-        : {name: 'Attendance', href:'/attendance', icon: CalendarIcon},
+        : //{name: 'Attendance', href:'/attendance', icon: CalendarIcon},
         {name: 'Leave', href:'/leave', icon: FileTextIcon},
         {name: 'Payslips', href:'/payslips', icon: PoundSterlingIcon},
         {name: 'Settings', href:'/settings', icon: SettingsIcon},
