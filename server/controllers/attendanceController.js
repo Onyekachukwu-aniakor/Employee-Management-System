@@ -15,7 +15,7 @@ export const clockInOut = async (req, res) => {
             return res.status(403).json({error:'Your account is deactivated you cannot clock In/Out'})
         // if 'employee.isDeleted' is false. (hrs,mins,sec,minsec) = (0,0,0,0)
         const today = new Date()
-        toFormData.setHours(0,0,0,0);
+        today.setHours(0,0,0,0);
 
         const existing = await Attendance.findOne({employee : employee._id, date : today})
          

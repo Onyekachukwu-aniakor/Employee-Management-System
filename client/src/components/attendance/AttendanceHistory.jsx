@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { getDayTypeDisplay, getWorkingHoursDisplay } from '../../assets/assets'
 // 'format' below will be used to display proper date
 import {format} from 'date-fns'

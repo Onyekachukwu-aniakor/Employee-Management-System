@@ -59,14 +59,14 @@ export const createLeave = async (req, res) => {
 //get leave
 //GET/api/leaves
 
-export const getLeave = async (req, res) => {
+export const getLeaves = async (req, res) => {
     try {
         const session = req.session;
         const isAdmin = session.role === 'ADMIN';
         if(isAdmin){
             const status = req.query.status;
             const where = status ? {status} : {};
-            const leaves = (await LeaveApplication.find(where).populate(employeeId)).sort({createdAt : -1});
+            const leaves = await LeaveApplication.find(where).populate('employeeId').sort({createdAt : -1});
 
             const data = leaves.map((l)=>{
                 const obj = l.toObject();

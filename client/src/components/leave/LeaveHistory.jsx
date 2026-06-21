@@ -1,6 +1,8 @@
 import { format } from "date-fns";
 import { CheckIcon, Loader2Icon, X } from "lucide-react";
 import { useState } from "react"
+import toast from "react-hot-toast";
+import api from "../../api/axios";
 
 
 const LeaveHistory = ({isAdmin, leaves, onUpdate}) => {
@@ -8,6 +10,15 @@ const LeaveHistory = ({isAdmin, leaves, onUpdate}) => {
 
     const handleStatusUpdate = async (id, status) => {
         setProcessing(id);
+        //backend connect
+        try {
+          await api.patch(`/leave/${id}`, {status});
+          onUpdate();
+        } catch (err) {
+          toast.error(err.response?.data?.error || err.message)
+        }finally {
+          setProcessing(null)
+        }
     }
   return (
        <div className='card overflow-hidden'>

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { DEPARTMENTS } from "../assets/assets";
 import { Loader2Icon } from "lucide-react";
+import toast from "react-hot-toast";
+import api from "../api/axios";
 
 
 const EmployeeForm = ({initialData, onSuccess, onCancel}) => {
@@ -11,7 +13,23 @@ const EmployeeForm = ({initialData, onSuccess, onCancel}) => {
     const isEditMode = !!initialData 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        
+        //backend connect below. pwd===password
+        setLoading(true)
+        const formData = new FormData(e.currentTarget);
+        if(isEditMode){
+            const pwd = formData.get("password")
+            if(!pwd) formData.delete("password")
+        }
+        try {
+            const url = isEditMode ? `/employees/${initialData.id}` : "/employees";
+            const method = isEditMode ? "put" : "post";
+            await api[method](url, formData)
+            onSuccess ? onSuccess() : navigate("/employees")
+        } catch (err) {
+            toast.error(err.response?.data?.error || err.message)
+        }finally{
+            setLoading(false)
+        }
     }
   return (
    <form onSubmit={handleSubmit} className="space-y-6 max-w-3xl animate-fade-in">
@@ -120,7 +138,8 @@ const EmployeeForm = ({initialData, onSuccess, onCancel}) => {
         <button className="btn-secondary" type="button" onClick={()=>(onCancel ? onCancel(): navigate(-1))}>
            Cancel
         </button>
-        <button className="btn-primary flex items-center justify-center" disabled={loading} type="button">
+        <button 
+        className="btn-primary flex items-center justify-center" disabled={loading} type="submit">
            {loading && <Loader2Icon className="w-5 h-5 mr-2 animate-spin" />}
            {isEditMode ? 'Update Employee' : 'Create Employee'}
         </button>

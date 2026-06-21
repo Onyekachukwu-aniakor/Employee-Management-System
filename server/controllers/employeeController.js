@@ -20,7 +20,7 @@ export const getEmployees = async (req, res) => {
 @param compareFn
 Function used to determine the order of the elements. It is expected to return a negative value if the first argument is less than the second argument, zero if they're equal, and a positive value otherwise. If omitted, the elements are sorted in ascending, UTF-16 code unit order.
 [11, 2, 22, 1].toSorted((a, b) => a - b) // [1, 2, 11, 22] */
-        const employees = (await Employee.find(where)).toSorted({createdAt : -1}).populate('userId', 'email  role').lean()
+        const employees = await Employee.find(where).sort({createdAt : -1}).populate('userId', 'email  role').lean()
 
         //get employees' list
         const result = employees.map((emp)=>({

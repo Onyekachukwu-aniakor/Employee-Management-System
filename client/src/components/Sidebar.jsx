@@ -1,26 +1,46 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom"
-import {dummyProfileData} from '../assets/assets'
-import { CalendarIcon, ChevronRightIcon, FileTextIcon, LayoutGridIcon, LogOutIcon, MenuIcon, PoundSterlingIcon, SettingsIcon, UserIcon, XIcon } from "lucide-react";
+//import {dummyProfileData} from '../assets/assets'
+import { CalendarIcon, ChevronRightIcon, FileTextIcon, LayoutGridIcon, Loader2, LogOutIcon, MenuIcon, PoundSterlingIcon, SettingsIcon, UserIcon, XIcon } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
+import api from "../api/axios";
 
 
 const Sidebar = () => {
+    
     //get path details
     const {pathname} = useLocation();
     const [userName, setUserName] = useState('');
     const [mobileMenu, setMobileMenu] = useState(false);
 
+    //useAuth backend
+    const {user, loading, logout}= useAuth()
+
+
     useEffect(()=>{
-        //get userName
-        setUserName(dummyProfileData.firstName   + ''   +    dummyProfileData.lastName)
+        //get userName use useEffect above
+    
+
+        api.get('/profile').then(({data})=>{
+        if(data.firstName){
+             setUserName(`${data.firstName}  ${data.lastName  || ' '}`.trim());}
+       }).catch((error)=>{
+        console.error('An error occurred:', error.message)
+       })
     },[]);
+
+    /* useEffect(()=>{
+        //get userName use useEffect above
+        setUserName(dummyProfileData.firstName   + ''   +    dummyProfileData.lastName)
+    },[]); */
     //close mobile sidebar on route change
     useEffect(()=>{
         //this closes mobile menu when pathname changes
         setMobileMenu(false)
     },[pathname]);
 
-    const role = "" || 'EMPLOYEE';
+    //const role = "" || 'EMPLOYEE';
+    const role = user?.role;
     const navItems = [
         {name: 'Dashboard', href:'/dashboard', icon: LayoutGridIcon},
         role === 'ADMIN'? {name: 'Employees', href:'/employees', icon: UserIcon} 
@@ -31,6 +51,7 @@ const Sidebar = () => {
     ];
 
     const handleLogout = ()=> {
+        logout()
         window.location.href = '/login'
     }
 
@@ -74,7 +95,11 @@ const Sidebar = () => {
         </div>
         {/* navigation list */}
         <div className="flex-1 px-2 space-y-0.5 overflow-y-auto">
-            {navItems.map((item)=>{
+            {loading ? (
+                <div className="px-3 py-2 flex items-center gap-2 text-slate-500"><Loader2 className="w-5 h-5 animate-spin"/>
+                <span className="text-sm">Loading...</span></div>
+            ) : (
+              navItems.map((item)=>{
                 /* if the pathname is starting with same href below, then the item will be active  */
                 const isActive = pathname.startsWith(item.href)
                 return (
@@ -85,7 +110,9 @@ const Sidebar = () => {
                     {isActive && <ChevronRightIcon className="w-3.5 h-3.5 text-indigo-500/50"/>}
                     </Link>
                 )
-            })}
+            })  
+            )}
+            
 
         </div>
         {/* Logout link */}
