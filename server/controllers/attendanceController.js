@@ -17,7 +17,7 @@ export const clockInOut = async (req, res) => {
         const today = new Date()
         today.setHours(0,0,0,0);
 
-        const existing = await Attendance.findOne({employee : employee._id, date : today})
+        const existing = await Attendance.findOne({employeeId : employee._id, date : today})
          
         const now = new Date()
         

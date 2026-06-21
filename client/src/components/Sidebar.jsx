@@ -7,6 +7,7 @@ import api from "../api/axios";
 
 
 const Sidebar = () => {
+
     
     //get path details
     const {pathname} = useLocation();
@@ -44,7 +45,7 @@ const Sidebar = () => {
     const navItems = [
         {name: 'Dashboard', href:'/dashboard', icon: LayoutGridIcon},
         role === 'ADMIN'? {name: 'Employees', href:'/employees', icon: UserIcon} 
-        : //{name: 'Attendance', href:'/attendance', icon: CalendarIcon},
+        : {name: 'Attendance', href:'/attendance', icon: CalendarIcon},
         {name: 'Leave', href:'/leave', icon: FileTextIcon},
         {name: 'Payslips', href:'/payslips', icon: PoundSterlingIcon},
         {name: 'Settings', href:'/settings', icon: SettingsIcon},

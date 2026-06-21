@@ -48,7 +48,7 @@ export const createLeave = async (req, res) => {
                 
             }
          })
-         return res,json({success : true, data : leave})
+         return res.json({success : true, data : leave})
 
     } catch (error) {
         return res.status(500).json({error :'Failed'})

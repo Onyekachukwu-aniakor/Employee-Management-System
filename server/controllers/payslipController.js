@@ -6,7 +6,7 @@ export const createPayslip = async (req, res) => {
     try {
         const { employeeId, month, year, basicSalary, allowances, deductions} = req.body
         if(!employeeId || !month || !year || !basicSalary){
-            return res.status(400).json({error: 'Missing field'})
+            return res.status(400).json({error: 'Missing field'});
         }
         // if its available
         const netSalary = Number(basicSalary) + Number(allowances || 0) - Number(deductions || 0)
