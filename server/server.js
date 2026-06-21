@@ -20,10 +20,9 @@ const port = process.env.PORT || 8000
   
 //Middleware
   app.use(cors({
-  origin: 'https://employee-management-system-two-ashy.vercel.app', // Allow only your frontend
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+  origin: 'https://employee-management-system-mn0lr148t.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true));
   app.use(express.json());
   /* Returns a Multer instance that provides several methods for generating middleware that process files uploaded in multipart/form-data format.
 
