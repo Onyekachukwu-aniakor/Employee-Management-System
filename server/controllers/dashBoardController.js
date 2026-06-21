@@ -31,16 +31,17 @@ export const getDashboard = async (req, res) => {
             pendingLeaves
         })
         }else {
-          const employee = await Employee.findOne({userId : session.userId}).lean();
-          if(!employee)return res.status(404).json({error : 'Employee not found'});
+          const employee = await Employee.findOne({userId : session.userId,}).lean();
+          if(!employee) return res.status(404).json({error : 'Employee not found'});
 
           const today = new Date()
-          const [currentMonthAttendance, pendingLeaves, latestPayslip ] = await Promise.all([
+          const [currentMonthAttendance, pendingLeaves, latestPayslip ] = 
+          await Promise.all([
             Attendance.countDocuments({
                 employeeId : employee._id,
                 date : {
-                    $gte : new Date(today.getFullYear, today.getMonth(), 1),
-                    $lt : new Date(today.getFullYear, today.getMonth() + 1, 1),   
+                    $gte : new Date(today.getFullYear(), today.getMonth(), 1),
+                    $lt : new Date(today.getFullYear(), today.getMonth() + 1, 1),   
                 }
 
             }),

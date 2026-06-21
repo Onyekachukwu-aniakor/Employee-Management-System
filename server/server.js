@@ -13,12 +13,13 @@ import dashbaordRouter from './routes/dashboardRoutes.js';
 import { serve } from "inngest/express";
 import { inngest, functions } from "./inngest/index.js"
 
+dotenv.config()
 const app = express();
 const port = process.env.PORT || 8000
-  dotenv.config()
+  
   
 //Middleware
-  app.use(cors());
+  app.use(cors( { origin: "http://localhost:5173", credentials: true } ));
   app.use(express.json());
   /* Returns a Multer instance that provides several methods for generating middleware that process files uploaded in multipart/form-data format.
 

@@ -4,6 +4,6 @@ import { getDashboard } from "../controllers/dashBoardController.js";
 
 const dashbaordRouter = Router();
 
-dashbaordRouter.get('/', protect, getDashboard)
+dashbaordRouter.get('/',protect, getDashboard)
 
 export default dashbaordRouter

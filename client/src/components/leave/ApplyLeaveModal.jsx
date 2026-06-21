@@ -1,5 +1,7 @@
 import { CalendarDays, FileTextIcon, Loader2Icon, SendIcon, X } from "lucide-react";
 import { useState } from "react"
+import api from "../../api/axios";
+import toast from "react-hot-toast";
 
 
 const ApplyLeaveModal = ({onClose, onSuccess, open}) => {
@@ -14,6 +16,18 @@ const ApplyLeaveModal = ({onClose, onSuccess, open}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        // backend connection
+        setLoading(true)
+        const formData = new FormData(e.currentTarget)
+        const data = Object.fromEntries(formData.entries())
+        
+        try {
+            await api.post('/leave', data)
+            onSuccess();
+            onClose();
+        } catch (err) {
+            toast.error(err.response?.data?.error || err?.message)
+        }
     };
 
     if(!open){return null}
@@ -77,7 +91,7 @@ const ApplyLeaveModal = ({onClose, onSuccess, open}) => {
                         Cancel
                     </button>
 
-                    <button onClick={onClose} className="btn-primary flex items-center justify-center gap-2 flex-1" type='submit'  disabled={loading}>
+                    <button  className="btn-primary flex items-center justify-center gap-2 flex-1" type='submit'  disabled={loading}>
                         {loading ? <Loader2Icon className="w-5 h-5 animate-spin"/> : <SendIcon className="w-5 h-5 "/>}
                         {loading? 'Submitting...' : 'Submit'}
                     </button>
