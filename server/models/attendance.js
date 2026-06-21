@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import Employee from "./Employee.js";
 
 
 const attendanceSchema = new mongoose.Schema({

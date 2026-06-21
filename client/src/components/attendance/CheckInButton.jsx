@@ -14,10 +14,10 @@ const CheckInButton = ({todayRecord, onAction}) => {
            // onAction()
         //},1000)
         try {
-            await api.post('/attendance')
-            onAction();
-        } catch (err) {
-            toast.error(err.response?.data?.error || err.message)
+            await api.post("/attendance")
+            onAction()
+        } catch (error) {
+            toast.error(error?.response?.data?.error || error?.message)
         }finally{
             setLoading(false)
         }
@@ -30,8 +30,8 @@ const CheckInButton = ({todayRecord, onAction}) => {
             </div>
         )
     }
-
-    const isCheckedIn = !!todayRecord?.checkIn;
+      // replace 'isCheckedIn with 'checkIn'
+    const isCheckedIn = !!todayRecord?.isCheckedIn;
   return (
     <div className='absolute bottom-4 right-4 flex flex-col z-1'>
         <button onClick={handleAttendance} disabled={loading}

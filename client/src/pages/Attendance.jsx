@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 
 
 const Attendance = () => {
-  const [history, setHistory] = useState([]);
+  const [History, setHistory] = useState([]);
   const [loading, setLoading]= useState(true)
   const [isDeleted, setIsDeleted]= useState(false);
 
@@ -41,6 +41,7 @@ const Attendance = () => {
   if(loading)return <Loading/>
   const today = new Date()
   today.setHours(0,0,0,0)
+  const history = []
   const todayRecord = history.find((r)=> new Date(r.date).toDateString() === today.toDateString())
   return (
     <div className="animate-fade-in">
