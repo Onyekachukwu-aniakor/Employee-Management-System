@@ -16,12 +16,24 @@ import { inngest, functions } from "./inngest/index.js"
 dotenv.config()
 const app = express();
 const port = process.env.PORT || 8000
+
+const allowedOrigins = [
+  'https://employee-management-system-mn0lr148t.vercel.app',
+  'https://employee-management-system-cdvtd5pt1.vercel.app', // Add your new origin here
+];
   
   
 //Middleware
-  app.use(cors({
-  origin: 'https://employee-management-system-mn0lr148t.vercel.app',
-  credentials: true}));
+ app.use(cors({
+  origin: function (origin, callback) {
+    // allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      return callback(new Error('CORS policy mismatch'), false);
+    }
+    return callback(null, true);
+  }
+}))
   app.use(express.json());
   /* Returns a Multer instance that provides several methods for generating middleware that process files uploaded in multipart/form-data format.
 
