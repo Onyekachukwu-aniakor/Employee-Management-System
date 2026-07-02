@@ -18,23 +18,10 @@ const app = express();
 const port = process.env.PORT || 8000
 
 
-  const allowedOrigins = [
-  'https://employee-management-system-two-ashy.vercel.app',
-  'https://employee-management-system-5hamtmrci.vercel.app' // Add your new origin here
-];
+ 
   
 //Middleware
- app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl) or check against whitelist
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true
-}))
+ app.use(cors()
   app.use(express.json());
   /* Returns a Multer instance that provides several methods for generating middleware that process files uploaded in multipart/form-data format.
 
