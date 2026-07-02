@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react"
+import  { useCallback, useEffect, useState } from "react"
 //import { dummyEmployeeData, dummyPayslipData } from "../assets/assets";
 import Loading from "../components/Loading";
 import PayslipList from "../components/payslip/PayslipList";
@@ -9,29 +9,7 @@ import api from "../api/axios";
 
 
 const Payslips = () => {
-class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false };
-  }
 
-  static getDerivedStateFromError(error) {
-    return { hasError: true };
-  }
-
-  componentDidCatch(error, info) {
-    console.error("Caught by boundary:", error, info);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return <h1>Something went wrong loading payslips.</h1>;
-    }
-    return this.props.children;
-  }
-}
-
-  // above
 
 
 
@@ -85,8 +63,8 @@ class ErrorBoundary extends React.Component {
           <GeneratePayslipForm employees={employees} onSuccess={fetchPayslips}/>
         )}
       </div>
-      <ErrorBoundary>
-      <PayslipList isAdmin={isAdmin}  payslips={payslips}/> </ErrorBoundary>
+      
+      <PayslipList isAdmin={isAdmin}  payslips={payslips}/> 
 
     </div>
   )
