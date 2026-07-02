@@ -20,10 +20,20 @@ const port = process.env.PORT || 8000
 
  
   
-//Middleware
- app.use(cors({
-  origin: 'https://employee-management-system-etf5pho8a.vercel.app',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+const allowedOrigins = [
+  'https://employee-management-system-etf5pho8a.vercel.app',
+  'https://employee-management-system-dbgksvsmk.vercel.app' // Add your new origin here
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl) or if in allowed list
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
   app.use(express.json());
