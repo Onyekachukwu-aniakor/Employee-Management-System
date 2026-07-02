@@ -21,7 +21,11 @@ const port = process.env.PORT || 8000
  
   
 //Middleware
- app.use(cors()
+ app.use(cors({
+  origin: 'https://employee-management-system-etf5pho8a.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
   app.use(express.json());
   /* Returns a Multer instance that provides several methods for generating middleware that process files uploaded in multipart/form-data format.
 
