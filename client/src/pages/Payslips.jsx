@@ -9,6 +9,33 @@ import api from "../api/axios";
 
 
 const Payslips = () => {
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, info) {
+    console.error("Caught by boundary:", error, info);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <h1>Something went wrong loading payslips.</h1>;
+    }
+    return this.props.children;
+  }
+}
+
+  // above
+
+
+
+  
   const [payslips, setPayslips]= useState([])
   const [employees, setEmployees]= useState([])
   const [loading, setLoading]= useState(true);
@@ -58,7 +85,8 @@ const Payslips = () => {
           <GeneratePayslipForm employees={employees} onSuccess={fetchPayslips}/>
         )}
       </div>
-      <PayslipList isAdmin={isAdmin}  payslips={payslips}/>
+      <ErrorBoundary>
+      <PayslipList isAdmin={isAdmin}  payslips={payslips}/> </ErrorBoundary>
 
     </div>
   )
