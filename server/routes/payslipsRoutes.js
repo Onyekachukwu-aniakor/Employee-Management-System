@@ -4,9 +4,8 @@ import { createPayslip, getPayslipById, getPayslips } from "../controllers/paysl
 
 const payslipRouter = Router();
 
-
-payslipRouter.post('/',protect,protectAdmin, createPayslip);
-payslipRouter.get('/', protect, getPayslips);
-payslipRouter.get('/:id', protect, getPayslipById)
+payslipRouter.post("/", protect, protectAdmin, createPayslip)
+payslipRouter.get("/", protect, getPayslips)
+payslipRouter.get("/:id", protect, getPayslipById)
 
 export default payslipRouter
