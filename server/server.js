@@ -20,6 +20,9 @@ const port = process.env.PORT || 8000
 
  
   
+  
+//Middleware
+  app.use(cors());
 const allowedOrigins = [
   'https://employee-management-system-etf5pho8a.vercel.app',
   'https://employee-management-system-dbgksvsmk.vercel.app' // Add your new origin here
@@ -46,7 +49,7 @@ The StorageEngine specified in storage will be used to store files. If storage i
   app.get('/', (req, res)=>{
     res.status(200).send('server very active');
   });
-  app.use('/api/employees', employeesRouter)
+  app.use('/api/employees', employeesRouter);
   app.use('/api/auth', authRouter)
   app.use('/api/profile', profileRouter)
   app.use('/api/attendance', attendanceRouter)
