@@ -4,8 +4,8 @@ import { createLeave, getLeaves, updateLeaveStatus } from "../controllers/leaveC
 
 const leaveRouter = Router();
 
-leaveRouter.patch('/:id',protect, protectAdmin, updateLeaveStatus)
-leaveRouter.get('/', protect, getLeaves)
-leaveRouter.post('/', protect, createLeave)
+leaveRouter.post("/", protect, createLeave)
+leaveRouter.get("/", protect, getLeaves)
+leaveRouter.patch("/:id", protect, protectAdmin,  updateLeaveStatus)
 
 export default leaveRouter;
