@@ -14,7 +14,7 @@ const autoCheckOut = inngest.createFunction(
    const {employeeId, attendanceId} = event.data;
 
    // wait for 9 hours before this function is executed
-   await step.sleepUntil('wait-for-9-hours', new Date(new Date().getTime() + 9 * 60 * 60 * 1000))
+   await step.sleepUntil('wait-for-the-9-hours', new Date(new Date().getTime() + 9 * 60 * 60 * 1000))
 
    //get attendance data
    let attendance = await Attendance.findById(attendanceId)
@@ -25,7 +25,7 @@ const autoCheckOut = inngest.createFunction(
       //send reminder email
       await sendEmail({
         to: employee.email,
-        subject: `Attendance checkout reminder`,
+        subject: `Attendance Check-Out Reminder`,
         body: `<div style="max-width: 600px;">
                     <h2>Hi ${employee.firstName}, 👋</h2>
                     <p style="font-size: 16px;">You have a check-in in ${employee.department} today:</p>
@@ -45,7 +45,7 @@ const autoCheckOut = inngest.createFunction(
       // SLEEPUNTIL : Wait until a particular date before continuing by passing a Date.To wait for a particular amount of time from now, always use sleep instead.
 
 
-      await step.sleepUntil('wait-for-1-hour', new Date(new Date().getTime() + 1 * 60 * 60 * 1000) )
+      await step.sleepUntil('wait-for-the-1-hour', new Date(new Date().getTime() + 1 * 60 * 60 * 1000) )
 
       attendance = await Attendance.findById(attendanceId)
 
@@ -118,7 +118,7 @@ const attendanceReminderCron = inngest.createFunction(
             isDeleted : false,
             employmentStatus : 'ACTIVE',
         }).lean();
-    return employee.map((e)=>({
+    return employees.map((e)=>({
         _id: e._id.toString(), 
         firstName: e.firstName,
         lastName : e.lastName,
@@ -129,7 +129,7 @@ const attendanceReminderCron = inngest.createFunction(
     // setp 3: get employees IDs on approved leave day
     const onLeaveIds = await step.run('get-on-leave-ids', async () => {
         const leaves = await LeaveApplication.find({
-            status : 'APROVED',
+            status : 'APPROVED',
             startDate : {$lte : new Date(today.endUTC)},
             endDate: {$gte : new Date(today.startUTC)},
         }).lean();
@@ -155,7 +155,7 @@ const attendanceReminderCron = inngest.createFunction(
                 //send email
                  sendEmail({
                     to: emp.email,
-                    subject: `Attendance reminder- please mark your attendance`,
+                    subject: `Attendance Reminder - Please Mark Your Attendance`,
                     body: `<div style="max-width: 600px; font-family: Arial, sans-serif;">
                                 <h2>Hi ${emp.firstName}, 👋</h2>
                                 <p style="font-size: 16px;">We noticed you haven't marked your attendance yet today.</p>
