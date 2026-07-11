@@ -1,72 +1,39 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import multer from 'multer'
-import connectDB from './config/db.js';
-import employeesRouter from './routes/employeeRoutes.js';
-import authRouter from './routes/authRoutes.js';
-import profileRouter from './routes/profileRoutes.js';
-import attendanceRouter from './routes/attendanceRoutes.js';
-import leaveRouter from './routes/leaveRoutes.js';
-import payslipRouter from './routes/payslipsRoutes.js';
-import dashbaordRouter from './routes/dashboardRoutes.js';
+import express from "express";
+import cors from "cors";
+import "dotenv/config";
+import multer from "multer";
+import connectDB from "./config/db.js";
+import authRouter from "./routes/authRoutes.js";
+import employeesRouter from "./routes/employeeRoutes.js";
+import profileRouter from "./routes/profileRoutes.js";
+import attendanceRouter from "./routes/attendanceRoutes.js";
+import leaveRouter from "./routes/leaveRoutes.js";
+import payslipRouter from "./routes/payslipsRoutes.js";
+import dashboardRouter from "./routes/dashboardRoutes.js";
+
 import { serve } from "inngest/express";
 import { inngest, functions } from "./inngest/index.js"
 
-dotenv.config()
-const app = express();
-<<<<<<< HEAD
-const port = process.env.PORT 
-=======
-const port = process.env.PORT || 8000
+const app = express()
+const PORT = process.env.PORT || 4000;
 
 
- 
->>>>>>> 9c4f3919c71a9fc952e3786b1cf229bdfedc5dc0
-  
-  
-//Middleware
-  app.use(cors());
-const allowedOrigins = [
-  'https://employee-management-system-etf5pho8a.vercel.app',
-  'https://employee-management-system-dbgksvsmk.vercel.app' // Add your new origin here
-];
+// Middleware
+app.use(cors())
+app.use(express.json())
+app.use(multer().none())
 
-app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl) or if in allowed list
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true
-}));
-  app.use(express.json());
-  /* Returns a Multer instance that provides several methods for generating middleware that process files uploaded in multipart/form-data format.
+// Routes
+app.get("/", (req, res)=> res.send("Server is running"));
+app.use("/api/auth", authRouter)
+app.use("/api/employees", employeesRouter)
+app.use("/api/profile", profileRouter)
+app.use("/api/attendance", attendanceRouter)
+app.use("/api/leave", leaveRouter)
+app.use("/api/payslips", payslipRouter)
+app.use("/api/dashboard", dashboardRouter)
 
-The StorageEngine specified in storage will be used to store files. If storage is not set and dest is, files will be stored in dest on the local file system with random names. If neither are set, files will be stored in memory. */
-  app.use(multer().none());
+app.use("/api/inngest", serve({ client: inngest, functions }));
 
-//Routes
-  app.get('/', (req, res)=>{
-    res.status(200).send('server very active');
-  });
-  app.use('/api/employees', employeesRouter);
-  app.use('/api/auth', authRouter)
-  app.use('/api/profile', profileRouter)
-  app.use('/api/attendance', attendanceRouter)
-  app.use('/api/leave', leaveRouter)
-  app.use('/api/payslips', payslipRouter)
-  app.use('/api/dashboard', dashbaordRouter)
-  app.use("/api/inngest", serve({ client: inngest, functions }));
-
-  
-
-
-connectDB();
-  app.listen(port, (req,res)=>{
-    console.log(`server running on http://localhost:${port}`)
-  })
-
+await connectDB()
+app.listen(PORT, ()=> console.log(`Server running on port ${PORT}`))
