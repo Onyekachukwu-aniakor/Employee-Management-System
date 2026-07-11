@@ -15,10 +15,14 @@ import { inngest, functions } from "./inngest/index.js"
 
 dotenv.config()
 const app = express();
+<<<<<<< HEAD
+const port = process.env.PORT 
+=======
 const port = process.env.PORT || 8000
 
 
  
+>>>>>>> 9c4f3919c71a9fc952e3786b1cf229bdfedc5dc0
   
   
 //Middleware
