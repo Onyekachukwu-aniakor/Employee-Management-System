@@ -10,12 +10,12 @@ export const protect = (req, res, next)=>{
         const session = jwt.verify(token, process.env.JWT_SECRET)
 
         if(!session){
-            return res.status(401).json({ error: "Unauthorized" });
+            return res.status(401).json({ error: "Unauthorized" })
         }
-        req.session = session;
+        req.session = session
         next()
     } catch (error) {
-        return res.status(401).json({ error: "Unauthorized" });
+        return res.status(401).json({ error: "Unauthorized" })
     }
 }
 

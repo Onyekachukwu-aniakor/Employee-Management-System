@@ -1,11 +1,11 @@
 import { Inngest } from "inngest";
-import Attendance from "../models/attendance.js";
+import Attendance from "../models/Attendance.js"
 import Employee from "../models/Employee.js";
 import LeaveApplication from "../models/LeaveApplication.js";
 import sendEmail from "../config/nodemailer.js";
 
 // Create a client to send and receive events
-export const inngest = new Inngest({ id: "Employee-Management-System" });
+export const inngest = new Inngest({ id: "Employee-Management-System" })
 
 // Your new function: 'auto Check-out for employee'
 const autoCheckOut = inngest.createFunction(
