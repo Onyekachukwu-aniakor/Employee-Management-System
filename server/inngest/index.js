@@ -1,4 +1,8 @@
 import { Inngest } from "inngest";
+<<<<<<< HEAD
+=======
+import Attendance from "../models/Attendance.js";
+>>>>>>> 62964c982794ba94e8f7c238563bf72bb21a0a66
 import Employee from "../models/Employee.js";
 import LeaveApplication from "../models/LeaveApplication.js";
 import sendEmail from "../config/nodemailer.js";
