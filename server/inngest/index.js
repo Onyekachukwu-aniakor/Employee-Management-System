@@ -1,8 +1,8 @@
 import { Inngest } from "inngest";
-import Attendance from "../models/Attendance.js"
 import Employee from "../models/Employee.js";
 import LeaveApplication from "../models/LeaveApplication.js";
 import sendEmail from "../config/nodemailer.js";
+import Attendance from "../models/Attendance.js";
 
 // Create a client to send and receive events
 export const inngest = new Inngest({ id: "Employee-Management-System" })
