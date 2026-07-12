@@ -1,4 +1,4 @@
-import { format} from 'date-fns'
+import { format } from 'date-fns'
 import { Download } from 'lucide-react'
 import React from 'react'
 
@@ -25,7 +25,6 @@ const PayslipList = ({payslips, isAdmin}) => {
                         </tr>
                     ) : (
                         payslips.map((payslip)=>{
-                            
                             return (
                                 <tr key={payslip._id || payslip.id}>
                                     {isAdmin && (
@@ -35,8 +34,6 @@ const PayslipList = ({payslips, isAdmin}) => {
                                     )}
 
                                     <td className='text-slate-500'>
-                                        
-
                                         {format(new Date('payslip.year, payslip.month - 1'), "dd MMMM yyyy")}
                                     </td>
 
