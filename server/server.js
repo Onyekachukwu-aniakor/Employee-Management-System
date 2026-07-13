@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 4000;
 
 // Middleware
 app.use(cors({
-  origin: 'https://employee-management-system-gamma-ten.vercel.app',
+  origin: 'https://employee-management-system-gamma-ten.vercel.app/login',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }))
