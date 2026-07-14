@@ -34,7 +34,7 @@ const PayslipList = ({payslips, isAdmin}) => {
                                     )}
 
                                     <td className='text-slate-500'>
-                                        {format(new Date('payslip.year, payslip.month - 1'), "dd MMMM yyyy")}
+                                        {format(new Date('payslip.year, payslip.month - 1'), "MMMM yyyy")}
                                     </td>
 
                                     <td className='text-slate-500'>
